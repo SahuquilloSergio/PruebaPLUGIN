@@ -21,6 +21,7 @@ import org.openide.util.NbBundle.Messages;
         category = "File",
         id = "org.sergio.pluginNB.GitHubRepositorio"
 )
+
 @ActionRegistration(
         iconBase = "org/sergio/pluginNB/github.png",
         displayName = "#CTL_GitHubRepositorio"
@@ -33,20 +34,21 @@ public final class GitHubRepositorio extends AbstractAction implements ActionLis
     public void actionPerformed(ActionEvent e) {
         // TODO implement action body
     }
-    public void crearRepositorio(){
-//        FileRepositoryBuilder builder = new FileRepositoryBuilder();
+
+    public void crearRepositorio() {
         try {
+            //pedimos las credenciales para el log in
             String nu = JOptionPane.showInputDialog("Nombre de usuario");
             String password = JOptionPane.showInputDialog("Contraseña");
-            GitHub github=GitHub.connectUsingPassword(nu, password);
+            //nos conectamos con las credenciales pedidas
+            GitHub github = GitHub.connectUsingPassword(nu, password);
+            //creamos repositorio y le damos èl nombre
             GHCreateRepositoryBuilder builder;
             String nombre = JOptionPane.showInputDialog("Nombre del repositorio");
-//            String descripcion = JOptionPane.showInputDialog("Descripcion del repositorio");
-            
-            builder=github.createRepository(nombre);
+            builder = github.createRepository(nombre);
             builder.create();
         } catch (IOException ex) {
-            System.out.println("Error: "+ex);
+            System.out.println("Error: " + ex);
         }
     }
 }
